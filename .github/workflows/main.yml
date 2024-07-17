@@ -26,11 +26,15 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build docker image
-        run: docker build -t johnpaulnasc/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} .
-
-      - name: Push docker image
-        run: docker push johnpaulnasc/nlw.journey.api:${{ steps.generate_sha.outputs.sha }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            johnpaulnasc/nlw.journey.api:${{ steps.generate_sha.outputs.sha }}
+            johnpaulnasc/nlw.journey.api:latest
+        
 
 
 
