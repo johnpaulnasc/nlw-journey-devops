@@ -29,5 +29,8 @@ jobs:
       - name: Build docker image
         run: docker build -t johnpaulnasc/nlw.journey.api:${{ steps.generate_sha.outputs.sha }} .
 
+      - name: Push docker image
+        run: docker push johnpaulnasc/nlw.journey.api:${{ steps.generate_sha.outputs.sha }}
+
 
 
